@@ -96,9 +96,14 @@ def main():
     parser.add_argument("--container", default="bonsai-b60-repro")
     parser.add_argument("--context", type=int, choices=[16384, 262144], default=16384)
     parser.add_argument("--output-tokens", type=int, default=1024)
+    parser.add_argument("--input-tokens", type=int,
+                        help="populate fewer tokens while keeping the selected context allocation")
     parser.add_argument("--output", type=pathlib.Path, required=True)
     parser.add_argument("--timeout", type=int, default=7200)
     args = parser.parse_args()
+    input_tokens = args.input_tokens if args.input_tokens is not None else args.context - 4096
+    require(0 < input_tokens and input_tokens + max(1024, args.output_tokens) < args.context,
+            "input and output must fit in the selected context")
     require(1 <= args.output_tokens <= 1024, "output must be between 1 and 1024 tokens")
     require(not args.output.exists(), "use a fresh output directory")
     args.output.mkdir(parents=True)
@@ -116,7 +121,7 @@ def main():
         p["HostIp"] == "127.0.0.1" and p["HostPort"] == str(origin.port) for p in ports),
         "HTTP origin does not match the selected container's loopback port")
     save(args.output / "run-config.json", {"context_each": args.context, "sessions": 3,
-        "input_tokens_each": args.context - 4096, "output_tokens_each": args.output_tokens,
+        "input_tokens_each": input_tokens, "output_tokens_each": args.output_tokens,
         "physical_vram_bytes": PHYSICAL_VRAM, "container_id": inspect["Id"],
         "image_id": inspect.get("Image"),
         "runtime_environment": {k: v for entry in inspect.get("Config", {}).get("Env", [])
@@ -143,7 +148,8 @@ def main():
     result = {"success": False}
     try:
         recorder = workload._Recorder(client.api, args.output)
-        items = workload.make_prompts(recorder.call, args.context, args.output / "source_prompts")
+        items = workload.make_prompts(recorder.call, args.context, args.output / "source_prompts",
+                                      targets=[input_tokens] * 3)
         waves = []
         for phase, warm in [("cold", False), ("warm1", True), ("warm2", True)]:
             require(not errors, "resource monitoring failed: " + str(errors))
