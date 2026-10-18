@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-18",
+  "fresh_SYCL_build": {
+    "success": true,
+    "seconds": 755.7690238952637,
+    "GPU_exposed_during_compilation": false,
+    "source_commit": "7adb2dd207bda1dda4510c498165666e9c51fe89",
+    "patch_sha256": "cd1153645070a1d3867e3a65cb04502f5816fb92ebfe12d5dec24830fa3a5ff6",
+    "compiler": "Intel(R) oneAPI DPC++/C++ Compiler 2025.3.0 (2025.3.0.20251010)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /opt/intel/oneapi/compiler/2025.3/bin/compiler\nConfiguration file: /opt/intel/oneapi/compiler/2025.3/bin/compiler/../icpx.cfg\n",
+    "binary_sha256": {
+      "libggml-base.so.0.21.0": "6e352c90e057e5d1615fc1316626cd4f1d1a85ab8656ab80736846a26d3734e0",
+      "libggml-cpu.so.0.21.0": "50e18e8838ce407e807ebedb981cdb8c6b4b1c410c3392eb2eccd21fb4dfba54",
+      "libggml-sycl.so.0.21.0": "0601ca40c2605a8236df4e737b2f80353827ef3dd0a8585db10cba9d90e00c57",
+      "libggml.so.0.21.0": "aa42492b79ce016b8befdcde448421396f53b25b9629eec68ce8d55a5a5826b0",
+      "libllama-bench-impl.so": "66badb6b381b8dd55cf47b7e93300fa01595a2b6de1eb0680dac1575d6a19c93",
+      "libllama-common.so.0.2.0": "b85d27360c347a2afe9c3318a954965fb953cbfe8cab546b3cdfbac3d4720277",
+      "libllama-server-impl.so": "68bb3111562372e11e5b94f10dec25358ed81b617533eff36e79fe00bea0cd31",
+      "libllama.so.0.2.0": "d1947e68a2b9997fd97ad01316cf0f91f5c4fe6b49860a2d96a71e709d19759d",
+      "libmtmd.so.0.2.0": "5bb1314bbeb7076a1f1529e5eaefe6ed389f2dd9b1302880ccf47552f8884d1e",
+      "llama-bench": "e5f2d35470153ae340e58b67256163bba7d8adbc9aa4c41da5023510b18cbfb2",
+      "llama-server": "0060bf0fc7be34ba0db82d9ea26d89b363d3fca1b4786b5029cae4b41cd4b3bf"
+    },
+    "guard_sha256": "4ba461b1dcb38533841b52efa900518dc5b44b98292090f0c6026a921a4f1d8f",
+    "API_only_UI_disabled": true
+  },
+  "GPU_version_probe": {
+    "exit_code": 0,
+    "model_loaded": false,
+    "GPU_generation_run": false,
+    "guard_live_and_peak_bytes": 0,
+    "version_text": "GPU_BUDGET enabled budget=67108864 bytes\nversion: 0.2.0-dev (build 1, commit 7adb2dd)\nbuilt with IntelLLVM 2025.3.0 for Linux x86_64\nGPU_BUDGET final live=0 peak=0 budget=67108864\n"
+  },
+  "CPU_state_regression": {
+    "success": true,
+    "gpu_access": false,
+    "expected_control_exit": 1,
+    "candidate_exit": 0,
+    "candidate_checks": 43913,
+    "candidate_source_sha256": "3f898339ef568f830968f2b9c6affe78cd8d6496127cedadf956e14664b4bf57"
+  },
+  "offline_benchmark_and_result_tests": 21,
+  "fake_driver_guard_trials": 10,
+  "secret_scan": {
+    "tool": "gitleaks8.30.1",
+    "findings": 0
+  },
+  "production_container_unchanged": true,
+  "full_context_benchmark_repeated_during_publication": false,
+  "limitations": [
+    "Fresh build/device enumeration and CPU tests are separate from historical full-context GPU qualification",
+    "No claim of bit-identical rebuilt binaries",
+    "A version query without an exposed Intel GPU fails in the upstream backend initialization; the GPU-enabled query succeeds"
+  ]
+}

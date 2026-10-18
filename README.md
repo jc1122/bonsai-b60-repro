@@ -1,5 +1,7 @@
 # Bonsai2 on a 24 GB Intel Arc Pro B60
 
+[![CPU checks](https://github.com/jc1122/bonsai-b60-repro/actions/workflows/validate.yml/badge.svg)](https://github.com/jc1122/bonsai-b60-repro/actions/workflows/validate.yml)
+
 Reproduce a measured **three-session, nearly full 256K-context** Bonsai2 deployment.
 This repository contains the pinned runtime patch, build/launch scripts, the original
 synthetic workload, selected measurement records and CPU regression checks.
