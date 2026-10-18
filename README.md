@@ -121,6 +121,13 @@ and requalifying the geometry and telemetry checks.
 
 ## Checks and results
 
+For evicted conversations, an optional 6 GiB host-RAM archive reduced a tested
+100K resume from 157.7 s to 0.735 s with identical greedy output. The three GPU
+slots and context allocation stay the same. Short-context steady throughput
+averaged 1.6% lower, with overlapping ranges; this is a resume-latency benefit.
+See [RAM-cache settings, measurements and reproduction](docs/ram-prompt-cache.md).
+The default launcher preserves the original cache-disabled benchmark profile.
+
 ```bash
 python3 -m unittest discover -s tests -v
 python3 scripts/guard_test.py

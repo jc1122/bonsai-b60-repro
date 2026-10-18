@@ -18,10 +18,11 @@ ENVIRONMENT = {
 }
 
 
-def command(model, context, port, name, image, compact=True):
+def command(model, context, port, name, image, compact=True, prompt_cache="off"):
     require(context in (16384, 262144), "only the documented three-slot profiles are supported")
     require(compact or context == 16384, "compare padded storage on the smaller profile first")
     require(1 <= port <= 65535, "invalid port")
+    require(prompt_cache in ("off", "ram6"), "unsupported prompt-cache profile")
     base = "/repro/.work/llama.cpp/build-sycl/bin"
     result = ["docker", "run", "--rm", "--name", name, "--device", "/dev/dri",
               "--publish", "127.0.0.1:%d:8080" % port,
@@ -39,9 +40,11 @@ def command(model, context, port, name, image, compact=True):
                "-ngl", "99", "-c", str(context * 3), "-np", "3", "-ub", "1024", "-b", "2048",
                "-ctk", "q4_0", "-ctv", "q4_0", "--host", "0.0.0.0", "--port", "8080",
                "--alias", "bonsai", "--jinja", "--metrics", "--flash-attn", "on", "--fit", "off",
-               "--no-context-shift", "--no-kv-unified", "--cache-ram", "0", "--ctx-checkpoints", "1",
+               "--no-context-shift", "--no-kv-unified", "--cache-ram", "6144" if prompt_cache == "ram6" else "0", "--ctx-checkpoints", "1",
                "--timeout", "3600", "--spec-type", "draft-mtp", "--spec-draft-n-max", "4",
                "-ctkd", "q4_0", "-ctvd", "q4_0"]
+    if prompt_cache == "ram6":
+        result.append("--no-cache-idle-slots")
     return result
 
 
@@ -53,11 +56,13 @@ def main():
     parser.add_argument("--name", default="bonsai-b60-repro")
     parser.add_argument("--image", default="bonsai-b60-repro:2025.3-neo26.35")
     parser.add_argument("--compact", choices=["on", "off"], default="on")
+    parser.add_argument("--prompt-cache", choices=["off", "ram6"], default="off",
+                        help="off reproduces the original measurements; ram6 archives evicted states in6GiB host RAM")
     parser.add_argument("--print-command", action="store_true")
     args = parser.parse_args()
     model = versions()["model"]
     path = (args.model or ROOT / "models" / model["filename"]).resolve()
-    argv = command(path, args.context, args.port, args.name, args.image, args.compact == "on")
+    argv = command(path, args.context, args.port, args.name, args.image, args.compact == "on", args.prompt_cache)
     if args.print_command:
         print(shlex.join(argv))
         return
@@ -67,7 +72,8 @@ def main():
     require((ROOT / ".work/guard/gpu_budget.so").is_file(), "build the allocation guard first")
     available = next(int(line.split()[1]) * 1024 for line in pathlib.Path("/proc/meminfo").read_text().splitlines()
                      if line.startswith("MemAvailable:"))
-    require(available >= 4 * 2**30, "less than 4 GiB host RAM available")
+    minimum = 16 if args.prompt_cache == "ram6" else 4
+    require(available >= minimum * 2**30, "less than %d GiB host RAM available" % minimum)
     os.execvp(argv[0], argv)
 
 
