@@ -1,0 +1,185 @@
+{
+  "schema": "bonsai-b60-ram-prompt-cache-v1",
+  "date": "2026-10-18",
+  "hardware": {
+    "GPU": "Intel Arc Pro B60",
+    "CPU": "Ryzen9 5950X",
+    "host_RAM_GiB": 32
+  },
+  "profile": {
+    "cache_ram_MiB": 6144,
+    "ctx_checkpoints": 1,
+    "cache_idle_slots": false,
+    "context_each": 262144,
+    "sessions": 3,
+    "MTP_depth": 4,
+    "KV": "q4_0",
+    "draft_window": 0,
+    "compact_recurrent": true
+  },
+  "eviction_protocol": "A100352tokens onslot0; replace slots0/1/2 with distinct12288-token B/C/D; resume identicalA onslot1. Greedy128outputtokens.",
+  "long": {
+    "input_tokens": 100352,
+    "control_resume_ttft_s": 157.70068559399806,
+    "candidate_initial_ttft_s": 158.0157764780015,
+    "candidate_resume_ttft_s": 0.7351140829996439,
+    "speedup": 214.5254583485846,
+    "cached_tokens": 100348,
+    "replayed_tokens": 4,
+    "generated_tokens": 128,
+    "greedy_equivalent": true,
+    "content_sha256": "ffdf652412111b2d3e7767c872bab28f81f07d92ba3e82097da707cb894b9f26",
+    "generated_token_ids_sha256": "b355faeaa8ca44fb44b681c4ac06dec96d414878380025bafcc30ffa654ead6a",
+    "initial_timings": {
+      "cache_n": 0,
+      "prompt_n": 100352,
+      "prompt_ms": 157878.802,
+      "prompt_per_token_ms": 1.5732501793686224,
+      "prompt_per_second": 635.6268145485421,
+      "predicted_n": 128,
+      "predicted_ms": 1707.237,
+      "predicted_per_token_ms": 13.442811023622047,
+      "predicted_per_second": 74.38920313934152,
+      "draft_n": 115,
+      "draft_n_accepted": 98
+    },
+    "resumed_timings": {
+      "cache_n": 100348,
+      "prompt_n": 4,
+      "prompt_ms": 178.703,
+      "prompt_per_token_ms": 44.67575,
+      "prompt_per_second": 22.383507831429803,
+      "predicted_n": 128,
+      "predicted_ms": 1763.238,
+      "predicted_per_token_ms": 13.883763779527559,
+      "predicted_per_second": 72.02657837455862,
+      "draft_n": 119,
+      "draft_n_accepted": 97
+    }
+  },
+  "short": {
+    "control": {
+      "input_tokens": 12288,
+      "initial_ttft_s": 15.064107213998795,
+      "resume_ttft_s": 13.39289085099881,
+      "cache_n": 0,
+      "prompt_n": 12288,
+      "greedy_equivalent": true
+    },
+    "ram8_cp32_short": {
+      "input_tokens": 12288,
+      "initial_ttft_s": 15.081331944005797,
+      "resume_ttft_s": 0.35866476099181455,
+      "cache_n": 12284,
+      "prompt_n": 4,
+      "greedy_equivalent": true
+    },
+    "ram8_cp8": {
+      "input_tokens": 12288,
+      "initial_ttft_s": 15.065723018997232,
+      "resume_ttft_s": 0.3342604270001175,
+      "cache_n": 12284,
+      "prompt_n": 4,
+      "greedy_equivalent": true
+    },
+    "ram6_cp1_noidle": {
+      "input_tokens": 12288,
+      "initial_ttft_s": 15.146657498989953,
+      "resume_ttft_s": 0.27246145000390243,
+      "cache_n": 12284,
+      "prompt_n": 4,
+      "greedy_equivalent": true
+    }
+  },
+  "resources": {
+    "samples": 146,
+    "min_host_available_bytes": 24852348928,
+    "max_resident_vram_bytes": 25260535808,
+    "max_resident_system_bytes": 0,
+    "swap_start": {
+      "pswpin": 6510,
+      "pswpout": 21376
+    },
+    "swap_end": {
+      "pswpin": 6519,
+      "pswpout": 21376
+    }
+  },
+  "warm_throughput": {
+    "scope": "3x12288tokens,512outputtokensperrequest;262144window allocation; not fullcontextthroughput",
+    "primary_control": [
+      144.90274690262825,
+      145.05146600158943
+    ],
+    "primary_candidate": [
+      144.94998237619788,
+      139.6709573135768
+    ],
+    "confirmation": {
+      "control_warm_median_tok_s": 143.8472672915899,
+      "candidate_warm_median_tok_s": 138.36839169575828,
+      "relative_throughput": 0.9619118548513994,
+      "control_warm_values": [
+        144.4999656544893,
+        138.2247722522477,
+        143.8472672915899
+      ],
+      "candidate_warm_values": [
+        144.39829700383368,
+        138.36839169575828,
+        137.53102623400432
+      ],
+      "scope": "fixed3 warm512-token waves per profile;3x12288inputs; full262K allocated"
+    },
+    "pooled_control_mean": 143.30524362050892,
+    "pooled_candidate_mean": 140.98373092467418,
+    "pooled_relative_change_percent": -1.6199774950192425,
+    "interpretation": "Possible small steady throughput cost; overlapping ranges. Predeclared5percent regression screen passed; no generation speedup claimed."
+  },
+  "negative_trial": {
+    "cache_ram_MiB": 8192,
+    "ctx_checkpoints": 8,
+    "cache_idle_slots": true,
+    "stage": "100K eviction before resume",
+    "GPU_resident_System_bytes": 873529344,
+    "inference_process_swap_bytes": 33906688,
+    "host_new_swapout_pages": 8771,
+    "memory_PSI_some_and_full_avg10": 1.63,
+    "action": "Automatic abort and exact original262K restoration. No new kernel fault/MCE; rootcause not established. Profile not adopted."
+  },
+  "limits": [
+    "No CPU-to-GPU prefill tested or implemented.",
+    "No new258048-token filled-context throughput or coding quality evaluation.",
+    "6GiB is archive storage, not extra activeGPU slots. Full262K entry retention depends on state size and other cached entries.",
+    "Onecheckpoint can miss reuse when an earlier prefix is edited or independent tasks diverge before the saved checkpoint.",
+    "These are finite synthetic tests, not an all-prompts correctness guarantee."
+  ],
+  "adoption": {
+    "status": "adopted",
+    "restart_verified": true,
+    "source_binaries_unchanged": true,
+    "slots": 3,
+    "context_each": 262144,
+    "new_kernel_faults": 0,
+    "new_kernel_log_loss_notices": 0,
+    "public_script_smoke": {
+      "success": true,
+      "input_tokens": 12288,
+      "initial_ttft_s": 14.648200029987493,
+      "resumed_ttft_s": 0.26540367800043896,
+      "cache_n": 12284,
+      "prompt_n": 4,
+      "greedy_equivalent": true,
+      "content_sha256": "08a69f9b26ac5ffff7f95f3d49f1ea811b8eb8ceb9a7ffe8d6dfe08c8f341120",
+      "resume_slot": 1,
+      "original_slot": 0,
+      "all_slots_replaced": true,
+      "draft_n": 127,
+      "draft_n_accepted": 94,
+      "resource_errors": []
+    },
+    "router_Responses_smoke_completed": true,
+    "rollback_helper_live_dry_run_passed": true,
+    "native_adoption_receipt_sha256": "6d338d52bb6fdcd49388fd108634126eaa72d65987bdf6580b61d0a08cd821db"
+  }
+}
