@@ -109,12 +109,37 @@ larger than the budget is skipped. This trial does not prove that three full 262
 conversations can all be archived simultaneously. The windows are still shared
 by only three active GPU slots.
 
-CPU preparation of queued requests is a separate possibility: run their prefill
-on CPU, then hand off compatible attention KV, recurrent state and draft state.
-Loading/tokenizing text alone does not compute those tensors. This fork has no
-ready-made CPU-prefill-to-GPU queue, and its ordinary slot-export path saves only
-the target context, so it is not a verified MTP handoff. No CPU-prefill speed or
-cross-backend correctness result is claimed here.
+CPU preparation of queued requests would require prefill on CPU, then a handoff
+of compatible attention KV, recurrent state and draft state. Loading/tokenizing
+text alone does not compute those tensors. This fork has no ready-made
+CPU-prefill-to-GPU queue, and its ordinary slot-export path saves only the target
+context, so it is not a verified MTP handoff.
+
+Source inspection at the pinned commit finds only the generic PTQ1_0 CPU dot
+product. An owner-relayed measurement from another session reported 0.66 tok/s
+for CPU-only `pp128` on an i5-12600KF. The raw CPU measurement was not present in
+the local evidence mirror checked for this update; this is not our reproduced
+CPU benchmark.
+
+Optimized kernels already exist in other branches. The authors of
+[Prism #248](https://github.com/PrismML-Eng/llama.cpp/pull/248) report PTQ1_0
+`pp64` improving from 0.71–0.72 to 2.66 tok/s on an i5-12600K using SSSE3.
+[Prism #250](https://github.com/PrismML-Eng/llama.cpp/pull/250) reports 13.41 tok/s
+`pp64` with 48 threads on dual Xeons using AVX2; its patch passes an application
+check against our pinned source, without being applied or built here.
+[ik_llama.cpp #2550](https://github.com/ikawrakow/ik_llama.cpp/pull/2550) reports
+PTQ1_0 `pp256` improving from 1.80 to 8.43 tok/s with R8 kernels on four laptop
+P-cores. These are third-party short-prompt results on different hardware, not
+evidence of our 5950X's long-context speed or compatible serialized state.
+
+For planning only, an aggregate CPU worker sustaining 8.43 tok/s during a
+ten-minute queue wait would prepare 5,058 tokens. At the measured 100K GPU
+prefill rate of 635.6 tok/s, that represents about eight seconds of GPU work
+before transfer, replay or CPU contention costs. This assumes the short-prompt
+CPU rate holds for the actual context. The optimized paths keep the idea open,
+but do not yet establish an end-to-end batch benefit. RAM restoration and reuse
+of valid shared prefixes take priority. No CPU-prefill inference trial or
+CPU/GPU state handoff has been performed on the production host.
 
 For the distinction between prefix reuse, checkpoints and archive capacity, see
 the upstream [Bonsai prompt-cache guide](https://github.com/PrismML-Eng/Bonsai-demo/blob/main/PROMPT-CACHE.md).
