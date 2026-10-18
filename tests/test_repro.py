@@ -86,6 +86,20 @@ class ReproTests(unittest.TestCase):
     def test_absent_gpu_evidence_fails(self):
         with self.assertRaises(RuntimeError): drm_residency("")
 
+    def test_closed_non_gpu_descriptor_does_not_discard_valid_drm_evidence(self):
+        class Descriptor:
+            def __init__(self, text=None): self.text = text
+            def read_text(self):
+                if self.text is None: raise FileNotFoundError("descriptor closed between enumeration and read")
+                return self.text
+        class Directory:
+            def iterdir(self):
+                return iter([Descriptor(), Descriptor("pos: 0\ndrm-driver: xe\ndrm-client-id: 7\ndrm-resident-vram0: 64 KiB\n")])
+        output = io.StringIO()
+        with patch("pathlib.Path", return_value=Directory()), contextlib.redirect_stdout(output):
+            exec(benchmark.FDINFO_SCRIPT, {})
+        self.assertEqual(drm_residency(output.getvalue())["resident_vram_bytes"], 65536)
+
     def record(self, final, warm=False):
         with tempfile.TemporaryDirectory() as directory:
             output = pathlib.Path(directory)

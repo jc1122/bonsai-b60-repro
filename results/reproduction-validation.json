@@ -38,7 +38,7 @@
     "candidate_checks": 43913,
     "candidate_source_sha256": "3f898339ef568f830968f2b9c6affe78cd8d6496127cedadf956e14664b4bf57"
   },
-  "offline_benchmark_and_result_tests": 21,
+  "offline_benchmark_and_result_tests": 22,
   "fake_driver_guard_trials": 10,
   "secret_scan": {
     "tool": "gitleaks8.30.1",

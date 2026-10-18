@@ -14,6 +14,16 @@ import server_workload as workload
 from launch import ENVIRONMENT
 
 PHYSICAL_VRAM = 25669140480  # Measured physical size of the tested B60, not advertised 24 GiB.
+FDINFO_SCRIPT = '''from pathlib import Path
+for path in Path("/proc/1/fdinfo").iterdir():
+    try:
+        text = path.read_text()
+    except FileNotFoundError:
+        continue
+    lines = [line for line in text.splitlines() if line.startswith("drm-")]
+    if lines:
+        print("\\n".join(lines))
+'''
 
 
 class Client:
@@ -71,8 +81,7 @@ def drm_residency(text):
 
 
 def resources(container):
-    result = subprocess.run(["docker", "exec", container, "bash", "-c",
-                             'grep -h -E "^drm-" /proc/1/fdinfo/*'],
+    result = subprocess.run(["docker", "exec", container, "python3", "-c", FDINFO_SCRIPT],
                             capture_output=True, text=True, timeout=15, check=True)
     row = drm_residency(result.stdout)
     row["unix"] = time.time()
