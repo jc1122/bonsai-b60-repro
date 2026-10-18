@@ -1,0 +1,3 @@
+# Preserve checksum-pinned upstream bytes, including diff context whitespace.
+patches/*.patch -whitespace
+guard/include/level_zero/ze_api.h -whitespace

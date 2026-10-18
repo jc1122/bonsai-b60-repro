@@ -1,0 +1,10 @@
+.work/
+models/
+runs/
+runtime/debs/
+__pycache__/
+*.pyc
+*.so
+*.gguf
+*.deb
+.env

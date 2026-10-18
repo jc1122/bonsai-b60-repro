@@ -1,0 +1,20 @@
+{
+  "schema": "public-selected-evidence-v1",
+  "description": "Selected fields exported from original measured records. Wave summaries are byte-identical; request fields omit generated text and prompt echoes; residency fields omit hardware/client identifiers. Original source SHA256 pins are retained. Original private audit tree is not required to run this repository.",
+  "source_record_sha256": {
+    "waves/cold.json": "4652c75a648964aadcbde213bf70d031c3265aa9bcc1a141ed261ddf80a63ce3",
+    "requests/cold_s0.json": "b195d7feef4b0b4c7eef0e885ed59846638b77d63fdc45d1b27ea6d6b3464a55",
+    "requests/cold_s1.json": "4d7715a7117578dc28d55f1505e1030915db72d2356915dcb86857d1962fa089",
+    "requests/cold_s2.json": "7bd1aee81f712fd5670b6e8e1bf454aab29d6819af93bc4ebde7707a58a68468",
+    "waves/warm1.json": "06113c5f39f60eed4ba320ff5c5d2f6f973a03464e92588b25c07599a6ae40a3",
+    "requests/warm1_s0.json": "db8bcde67b1a9ced752f4e8b16941a38aa9a6c4d04cbc41a56d6434002204c70",
+    "requests/warm1_s1.json": "7b65f304475200c6cfb65058e778968d51296b9b88b79dda3e0eb4a791cba2c6",
+    "requests/warm1_s2.json": "46303b028cc417a5d68f2689f8f904050885a36d710a3a1f4f7210ec89dcef13",
+    "waves/warm2.json": "9dac277f193be10e52833222b887ab5eec44a6653e842b55aa5f1324b813e0bd",
+    "requests/warm2_s0.json": "7e588d7465b0a9536c36bf87841625ba1bfa838a1bef7f13da801d2e7a05fe56",
+    "requests/warm2_s1.json": "ab1e21a18ca4ca6586a16729554862f8605d4daa2da17e2a99e2680deb5c2e84",
+    "requests/warm2_s2.json": "aa57cbf70ce4e2e246a9b5a7c0a4f559faf10151f6f997347535c850f23a3f56",
+    "resources.jsonl": "b03b5615ea2bc0ce376b5f5d264942b324fcbceee97b2a36e6e8932de8be4cc8",
+    "NATIVE_STAGE_RECEIPT.json": "f7e2220f2f2d04ede6839561b823c37c88ec14c298adf5996cc39fe6e4c3bc6b"
+  }
+}

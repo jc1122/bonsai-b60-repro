@@ -1,0 +1,18 @@
+{
+  "phase": "cold",
+  "effective_n_predict": 1024,
+  "expected_requests": 3,
+  "ok_requests": 3,
+  "wall_s": 2476.578669753999,
+  "peak_active_slots": 3,
+  "request_files": [
+    "requests/cold_s0.json",
+    "requests/cold_s1.json",
+    "requests/cold_s2.json"
+  ],
+  "concurrency_required": true,
+  "ok": true,
+  "median_request_s": 2464.299681933,
+  "generated_tokens": 3072,
+  "aggregate_tokens_per_s": 1.2404209232348533
+}

@@ -1,0 +1,31 @@
+{
+  "M15": {
+    "matched_requests": 54,
+    "adjusted_gain_percent": [
+      -0.32813521188329586,
+      0.35640416135775954
+    ],
+    "control_drift_percent": [
+      0.8975725488768571,
+      1.4841767713995146
+    ],
+    "deployed": false
+  },
+  "TinyGDN": {
+    "matched_requests_total": 135,
+    "extended_adjusted_gain_percent": -0.03440776946626034,
+    "extended_control_drift_percent": 2.830755645720462,
+    "deployed": false
+  },
+  "attention_splits": {
+    "strict_numerical_gate": "failed",
+    "max_abs": 8.866190910339355e-07,
+    "speed_qualified": false,
+    "deployed": false
+  },
+  "CPU_KV_offload": {
+    "historical_slowdown_factor": 8.085135578208739,
+    "scope": "Earlier active CPU-KV probe; later transport-only bandwidth study does not establish integrated offload performance."
+  },
+  "source_handoff_sha256": "b8c33f4009147f080cfe82979f58519cfd1fd07064806d4d7f3a527c46a51f96"
+}

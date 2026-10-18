@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-17",
+  "sessions": 3,
+  "context_each": 262144,
+  "input_tokens_each": 258048,
+  "output_tokens_each": 1024,
+  "warm_aggregate_tok_s": 54.260380776252646,
+  "warm_mean_session_share_tok_s": 18.086793592084216,
+  "cold_full_batch_seconds": 2476.578669753999,
+  "max_resident_vram_bytes": 25260539904,
+  "physical_vram_bytes": 25669140480,
+  "physical_headroom_bytes_min": 408600576,
+  "resident_system_bytes_max": 0,
+  "min_host_mem_available_bytes": 27743105024,
+  "coding_quality_scored_at_full_context": false,
+  "sample_count": 1272,
+  "synthetic_workload": true,
+  "summary_statistic": "arithmetic mean of the two complete warm-wave aggregate rates; equal-share mean is aggregate / 3",
+  "compact_recurrent_bytes": 598302720,
+  "padded_recurrent_bytes": 994443264,
+  "saved_recurrent_bytes": 396140544,
+  "source_receipt_sha256": "f7e2220f2f2d04ede6839561b823c37c88ec14c298adf5996cc39fe6e4c3bc6b"
+}

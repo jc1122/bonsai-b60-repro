@@ -1,0 +1,12 @@
+{
+  "state_checkpoint_logical_bitwise_comparisons_Q4_and_F16": 252,
+  "common_forward_pairs": 4,
+  "comparisons_each_pair": 133,
+  "short_functional_cache_cancel_waves": 7,
+  "CPU_buffer_layout_serialization_checks": 43913,
+  "compact_scope": "Exactly3 eligible recurrent cells and3 maximum sequences; unsupported layouts decline to padded storage",
+  "new_SYCL_arithmetic_kernel": false,
+  "isolated_speed_gain_claimed": false,
+  "scope": "Historical native qualification. New CPU regression reproduces layout and serialization checks only; full native raw-logit/state captures are not rerun by CPU CI.",
+  "source_receipt_sha256": "f7e2220f2f2d04ede6839561b823c37c88ec14c298adf5996cc39fe6e4c3bc6b"
+}

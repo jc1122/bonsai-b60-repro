@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-15 to2026-10-16",
+  "scope": "Separate603-task single-request coding suite; not the full-context capacity workload",
+  "tasks": 603,
+  "Bonsai": {
+    "passed": 512,
+    "wrong_completed": 83,
+    "output_cutoffs": 8
+  },
+  "Qwen": {
+    "passed": 521,
+    "wrong_completed": 80,
+    "output_cutoffs": 2
+  },
+  "equivalence_established": false,
+  "Bonsai_minus_Qwen_percentage_points": -1.4925373134328357,
+  "paired95percent_bootstrap_interval_pp": [
+    -3.1509,
+    0.1658
+  ],
+  "prespecified_equivalence_margin_pp": 3,
+  "limitations": [
+    "32,000 output-token allowance; cutoffs separate from completed wrong answers",
+    "No scored coding evaluation at258K actual input",
+    "Compact state bitwise checks do not measure the independent quality cost of Q4KV"
+  ]
+}

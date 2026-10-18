@@ -1,0 +1,18 @@
+{
+  "phase": "warm1",
+  "effective_n_predict": 1024,
+  "expected_requests": 3,
+  "ok_requests": 3,
+  "wall_s": 57.51431991199934,
+  "peak_active_slots": 3,
+  "request_files": [
+    "requests/warm1_s0.json",
+    "requests/warm1_s2.json",
+    "requests/warm1_s1.json"
+  ],
+  "concurrency_required": true,
+  "ok": true,
+  "median_request_s": 56.46155010899747,
+  "generated_tokens": 3072,
+  "aggregate_tokens_per_s": 53.41278493252394
+}
