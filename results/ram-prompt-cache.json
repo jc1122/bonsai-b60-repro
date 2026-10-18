@@ -29,7 +29,6 @@
     "generated_tokens": 128,
     "greedy_equivalent": true,
     "content_sha256": "ffdf652412111b2d3e7767c872bab28f81f07d92ba3e82097da707cb894b9f26",
-    "generated_token_ids_sha256": "b355faeaa8ca44fb44b681c4ac06dec96d414878380025bafcc30ffa654ead6a",
     "initial_timings": {
       "cache_n": 0,
       "prompt_n": 100352,
@@ -55,7 +54,8 @@
       "predicted_per_second": 72.02657837455862,
       "draft_n": 119,
       "draft_n_accepted": 97
-    }
+    },
+    "continuation_digest_sha256": "b355faeaa8ca44fb44b681c4ac06dec96d414878380025bafcc30ffa654ead6a"
   },
   "short": {
     "control": {
